@@ -1,9 +1,9 @@
 {
-  "name": "PH-HealthCare-Server",
+  "name": "HealthCare-Server",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Apollo-Level2-Web-Dev/PH-HealthCare-Server.git",
-  "author": "fahimahammed <fahimahammed.cse@gmail.com>",
+  "repository": "https://github.com/mdrakibmia99/health-care-prisma.git",
+  "author": "mdrakibmia99 <mdrakibmia680@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
