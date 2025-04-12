@@ -9,7 +9,7 @@ import prisma from "../../shared/prisma";
 const getAllFromDB = async (query: any, options: any) => {
   const { searchTerm, ...filterData } = query;
   const {page, limit, skip ,sortBy, orderBy} =paginationHelper.calculatePagination(options);
-  const andCondition: Prisma.AdminWhereInput[] = [];
+  const andCondition: Prisma.AdminWhereInput[] = [{AND: {isDeleted: false}}];
   // const adminSearchableFields = ["name", "email"];
   console.log(filterData, "oi kire");
   if (query?.searchTerm) {
@@ -34,6 +34,7 @@ const getAllFromDB = async (query: any, options: any) => {
   };
   const result = await prisma.admin.findMany({
     where: whereCondition,
+ 
     skip,
     take: limit,
     orderBy:
