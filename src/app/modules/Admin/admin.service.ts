@@ -2,12 +2,14 @@ import { Admin, Prisma, UserStatus } from "@prisma/client";
 import { adminSearchableFields } from "./admin.constant";
 import { paginationHelper } from "../../helpers/paginationHelper";
 import prisma from "../../shared/prisma";
+import { IAdminFilterRequest } from "./admin.interface";
+import { IPaginationOptions } from "../../interfaces/pagination";
 
 
 
 
-const getAllFromDB = async (query: any, options: any) => {
-  const { searchTerm, ...filterData } = query;
+const getAllFromDB = async (query: IAdminFilterRequest, options: IPaginationOptions) => {
+  const { searchTerm, ...filterData } = query as { [key: string]: string | undefined };
   const {page, limit, skip ,sortBy, orderBy} =paginationHelper.calculatePagination(options);
   const andCondition: Prisma.AdminWhereInput[] = [{AND: {isDeleted: false}}];
   // const adminSearchableFields = ["name", "email"];
