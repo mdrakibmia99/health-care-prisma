@@ -3,7 +3,7 @@ import { adminService } from "./admin.service";
 import pick from "../../shared/pick";
 import { adminFilterableFields } from "./admin.constant";
 import sendResponse from "../../shared/sendResponse";
-import httpStatus from "http-status-codes";
+import  { StatusCodes } from "http-status-codes";
 import catchAsync from "../../shared/catchAsync";
 
 
@@ -12,7 +12,7 @@ const getAllFromDB: RequestHandler = catchAsync(async (req, res) => {
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
   const result = await adminService.getAllFromDB(filter, options);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: StatusCodes.OK,
     success: true,
     message: "Admin fetched successfully!",
     data: result.data,
@@ -25,7 +25,7 @@ const getByIdFromDB: RequestHandler = catchAsync(async (req, res) => {
   const result = await adminService.getByIdFromDB(id);
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: StatusCodes.OK,
     success: true,
     message: "Admin fetched successfully!",
     data: result,
@@ -35,7 +35,7 @@ const updateIntoDB: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await adminService.updateIntoDB(id, req.body);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: StatusCodes.OK,
     success: true,
     message: "Admin data updated!",
     data: result,
@@ -47,7 +47,7 @@ const deleteFromDB: RequestHandler = catchAsync(
     const { id } = req.params;
     const result = await adminService.deleteFromDB(id);
     sendResponse(res, {
-      statusCode: httpStatus.OK,
+      statusCode: StatusCodes.OK,
       success: true,
       message: "Admin data deleted!",
       data: result,
@@ -60,7 +60,7 @@ const softDeleteFromDB: RequestHandler = catchAsync(async (req, res) => {
 
   const result = await adminService.softDeleteFromDB(id);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: StatusCodes.OK,
     success: true,
     message: "Admin data deleted!",
     data: result,
