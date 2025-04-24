@@ -3,6 +3,8 @@ import * as bcrypt from 'bcrypt'
 import prisma from '../../shared/prisma';
 import { UserStatus } from '@prisma/client';
 import { jwtHelpers } from '../../helpers/jwtHelpers';
+import config from '../../../config';
+import { Secret } from 'jsonwebtoken';
 
 const loginUser = async (payload: {
     email: string,
@@ -24,16 +26,16 @@ const loginUser = async (payload: {
         email: userData.email,
         role: userData.role
     },
-        "abcdefg",
-        "5m"
+        config.jwt.jwt_secret as Secret,
+        config.jwt.expires_in as string
     );
 
     const refreshToken = jwtHelpers.generateToken({
         email: userData.email,
         role: userData.role
     },
-        "abcdefghgijklmnop",
-        "30d"
+    config.jwt.refresh_token_secret as Secret,
+    config.jwt.refresh_token_expires_in as string
     );
 
     return {
