@@ -17,10 +17,10 @@ router.get(
 );
 
 router.get(
-    '/me',
-    auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
-    userController.getMyProfile
-)
+  "/me",
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
+  userController.getMyProfile
+);
 router.post(
   "/create-admin",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
@@ -53,10 +53,26 @@ router.post(
 router.patch(
   "/update-my-profile",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
-  fileUploader.upload.single('file'),
+  fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
-      req.body = JSON.parse(req.body.data)
-      return userController.updateMyProfile(req, res, next)
+    if (
+      req?.user?.role === UserRole.SUPER_ADMIN ||
+      req?.user?.role === UserRole.ADMIN
+    ) {
+      req.body = userValidation.updateAdminProfile.parse(
+        JSON.parse(req.body.data)
+      );
+    } else if (req?.user?.role === UserRole.DOCTOR) {
+      req.body = userValidation.updateDoctorProfile.parse(
+        JSON.parse(req.body.data)
+      );
+    } else if (req?.user?.role === UserRole.PATIENT) {
+      req.body = userValidation.updateDoctorProfile.parse(
+        JSON.parse(req.body.data)
+      );
+    }
+    
+    return userController.updateMyProfile(req, res, next);
   }
 );
 router.patch(

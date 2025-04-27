@@ -78,10 +78,37 @@ const updateStatus = z.object({
         status: z.enum([UserStatus.ACTIVE, UserStatus.BLOCKED, UserStatus.DELETED])
     })
 })
-
+const updateAdminProfile = z.object({
+  name: z.string().optional(),
+  contactNumber: z.string().optional(),
+  profilePhoto: z.string().optional(),
+})
+const updateDoctorProfile = z.object({
+  name: z.string().optional(),
+  contactNumber: z.string().optional(),
+  address: z.string().optional(),
+  registrationNumber: z.string().optional(),
+  experience: z.number().optional(),
+  gender: z.enum([Gender.MALE, Gender.FEMALE]).optional(),
+  appointmentFee: z.number().optional(),
+  qualification: z.string().optional(),
+  currentWorkingPlace: z.string().optional(),
+  designation: z.string().optional(),
+  profilePhoto: z.string().optional(),
+})
+const updatePatientProfile = z.object({
+    name: z.string().optional(),
+    contactNumber: z.string().optional(),
+    address: z.string().optional(),
+    profilePhoto: z.string().optional(),
+})
 export const userValidation = {
   createAdmin,
   createDoctor,
   createPatient,
-  updateStatus
+  updateStatus,
+  updateAdminProfile,
+  updateDoctorProfile,
+  updatePatientProfile
+
 };
