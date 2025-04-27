@@ -67,7 +67,7 @@ router.patch(
         JSON.parse(req.body.data)
       );
     } else if (req?.user?.role === UserRole.PATIENT) {
-      req.body = userValidation.updateDoctorProfile.parse(
+      req.body = userValidation.updatePatientProfile.parse(
         JSON.parse(req.body.data)
       );
     }
