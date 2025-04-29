@@ -6,7 +6,7 @@ import { DoctorValidation } from "./doctor.validations";
 import { DoctorController } from "./doctor.controller";
 
 const router = Router();
-
+router.get('/', DoctorController.getAllFromDB);
 router.patch(
   "/:id",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
