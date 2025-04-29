@@ -6,15 +6,21 @@ import { DoctorValidation } from "./doctor.validations";
 import { DoctorController } from "./doctor.controller";
 
 const router = Router();
-router.get('/', DoctorController.getAllFromDB);
+router.get("/", DoctorController.getAllFromDB);
 
-router.get('/:id', DoctorController.getByIdFromDB);
+router.get("/:id", DoctorController.getByIdFromDB);
 
 router.patch(
   "/:id",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
   validateRequest(DoctorValidation.update),
   DoctorController.updateIntoDB
+);
+
+router.delete(
+  "/:id",
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
+  DoctorController.deleteFromDB
 );
 
 export const DoctorRoutes = router;
