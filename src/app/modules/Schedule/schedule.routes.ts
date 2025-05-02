@@ -21,10 +21,24 @@ router.get(
     auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
     ScheduleController.getByIdFromDB
 );
+
 router.post(
     '/',
     auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
     ScheduleController.inserIntoDB
+);
+
+
+
+/**
+ * API ENDPOINT: /schdeule/:id
+ * 
+ * Delete schedule data by id
+ */
+router.delete(
+    '/:id',
+    auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
+    ScheduleController.deleteFromDB
 );
 
 export const ScheduleRoutes = router;
