@@ -28,6 +28,14 @@ const insertIntoDB = async (user: any, payload: {
         return result;
     };
 };
+const deleteFromDB = async (id: string): Promise<Schedule> => {
+    const result = await prisma.schedule.delete({
+        where: {
+            id,
+        },
+    });
+    return result;
+};
 export const DoctorScheduleService = {
     insertIntoDB,
 
