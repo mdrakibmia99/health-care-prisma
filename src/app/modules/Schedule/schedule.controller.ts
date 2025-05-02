@@ -17,7 +17,23 @@ const insertIntoDB = catchAsync(async (req: Request & { user?: IAuthUser }, res:
         data: result
     });
 });
+
+const getAllFromDB = catchAsync(async (req: Request & { user?: IAuthUser }, res: Response) => {
+    const filters = pick(req.query, ['startDate', 'endDate']);
+    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+
+    const user = req.user;
+    const result = await ScheduleService.getAllFromDB(filters, options, user as IAuthUser);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Schedule fetched successfully!",
+        data: result
+    });
+});
 export const DoctorScheduleController = {
     insertIntoDB,
+    getAllFromDB
    
 };

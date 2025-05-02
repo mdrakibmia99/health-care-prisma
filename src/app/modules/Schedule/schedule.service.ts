@@ -18,7 +18,15 @@ const insertIntoDB = async (user: any, payload: {
         data: doctorScheduleData
     });
 
-    return result;
+    return result;const getByIdFromDB = async (id: string): Promise<Schedule | null> => {
+        const result = await prisma.schedule.findUnique({
+            where: {
+                id,
+            },
+        });
+        //console.log(result?.startDateTime.getHours() + ":" + result?.startDateTime.getMinutes())
+        return result;
+    };
 };
 export const DoctorScheduleService = {
     insertIntoDB,
