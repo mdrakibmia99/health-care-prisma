@@ -25,7 +25,7 @@ router.get(
 router.post(
     '/',
     auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
-    ScheduleController.inserIntoDB
+    ScheduleController.insertIntoDB
 );
 
 

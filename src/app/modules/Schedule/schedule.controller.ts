@@ -7,8 +7,8 @@ import sendResponse from "../../shared/sendResponse";
 import { StatusCodes } from "http-status-codes";
 import pick from "../../shared/pick";
 
-const inserIntoDB = catchAsync(async (req: Request, res: Response) => {
-    const result = await ScheduleService.inserIntoDB(req.body);
+const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
+    const result = await ScheduleService.insertIntoDB(req.body);
 
     sendResponse(res, {
         statusCode: StatusCodes.OK,
@@ -57,7 +57,7 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
 
 
 export const ScheduleController = {
-    inserIntoDB,
+    insertIntoDB,
     getAllFromDB,
     getByIdFromDB,
     deleteFromDB

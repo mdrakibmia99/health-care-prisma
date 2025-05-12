@@ -13,7 +13,7 @@ const convertDateTime = async (date: Date) => {
     return new Date(date.getTime() + offset);
 }
 
-const inserIntoDB = async (payload: ISchedule): Promise<Schedule[]> => {
+const insertIntoDB = async (payload: ISchedule): Promise<Schedule[]> => {
     const { startDate, endDate, startTime, endTime } = payload;
 
     const interverlTime = 30;
@@ -192,7 +192,7 @@ const deleteFromDB = async (id: string): Promise<Schedule> => {
 
 
 export const ScheduleService = {
-    inserIntoDB,
+    insertIntoDB,
     getAllFromDB,
     getByIdFromDB,
     deleteFromDB
