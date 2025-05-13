@@ -47,8 +47,23 @@ const insertIntoDB = catchAsync(async (req: Request , res: Response) => {
     });
 });
 
+const deleteFromDB = catchAsync(async (req: Request , res: Response) => {
+
+    const user = req.user;
+    const { id } = req.params;
+    const result = await DoctorScheduleService.deleteFromDB(user as IAuthUser, id);
+
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "My Schedule deleted successfully!",
+        data: result
+    });
+});
+
 export const DoctorScheduleController = {
     getAllFromDB,
     getMySchedule,
-    insertIntoDB
+    insertIntoDB,
+    deleteFromDB
 };
