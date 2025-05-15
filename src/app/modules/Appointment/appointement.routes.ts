@@ -13,16 +13,17 @@ const router = Router();
  * Get all appointment with filtering
  * Only accessable for Admin & Super Admin
  */
-router.get(
-    '/',
-    auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
-    AppointmentController.getAllFromDB
-);
+
 router.get(
     '/my-appointment',
     auth(UserRole.PATIENT, UserRole.DOCTOR),
     AppointmentController.getMyAppointment
 )
+router.get(
+    '/',
+    auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
+    AppointmentController.getAllFromDB
+);
 router.post(
     '/',
     auth(UserRole.PATIENT),
