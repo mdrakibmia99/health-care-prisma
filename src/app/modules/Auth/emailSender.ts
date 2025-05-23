@@ -30,4 +30,3 @@ const emailSender = async (
 
 export default emailSender;
 
-// test
