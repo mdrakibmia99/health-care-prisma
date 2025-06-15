@@ -8,6 +8,8 @@ router.get(
     PaymentController.validatePayment
 )
 
+
+
 router.post(
     '/init-payment/:appointmentId',
     PaymentController.initPayment
